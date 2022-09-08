@@ -130,8 +130,6 @@ export const Top: FC = () => {
             <br />- イタリック
             <br />- インラインコード
           </Description>
-
-          <Item onClick={() => router.push('/test/')}>Testページへ</Item>
         </Right>
       </Inner>
     </Wrap>
