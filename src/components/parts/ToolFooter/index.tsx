@@ -1,14 +1,13 @@
+// editorstateの確認のため
+
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { $getRoot } from 'lexical'
 import { mdiSend } from '@mdi/js'
-import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { FC, memo, useCallback } from 'react'
 import { useRecoilState } from 'recoil'
 import styled, { css } from 'styled-components'
 import { Icon } from '../Icon'
 import { editorState } from '@/recoil/editor'
-import { $getRoot } from 'lexical'
-import { useGaClickSend } from '@/hook/ga/use-editor-send'
-import { useGaTest } from '@/hook/ga/use-test'
-import { useGaJapan } from '@/hook/ga/use-ga-jpn'
 
 // ========================================================================
 // Style
@@ -45,14 +44,13 @@ const IconWrap = styled.div<{ isDisabled?: boolean }>`
 export const ToolFooter: FC = memo(() => {
   const [editor] = useLexicalComposerContext()
   const [, setState] = useRecoilState(editorState)
-  const gaClickSend = useGaClickSend()
-  const gaTest = useGaTest()
-  const gaJapan = useGaJapan()
 
   const onClickSend = useCallback(() => {
     const editorState = editor.getEditorState()
 
     setState({ data: JSON.stringify(editorState.toJSON()) })
+
+    console.log(JSON.stringify(editorState.toJSON()))
 
     editor.update(() => {
       const root = $getRoot()
@@ -65,18 +63,6 @@ export const ToolFooter: FC = memo(() => {
       <IconWrap
         onClick={() => {
           onClickSend()
-
-          const editorState = editor.getEditorState()
-
-          gaClickSend({
-            event_category: 'click',
-            event_label: 'editor',
-            value: JSON.stringify(editorState.toJSON()),
-          })
-
-          gaTest({ id: JSON.stringify(editorState.toJSON()) })
-
-          gaJapan({ text: JSON.stringify(editorState.toJSON()) })
         }}
       >
         <Icon path={mdiSend} />

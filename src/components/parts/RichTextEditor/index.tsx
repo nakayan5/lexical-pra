@@ -92,7 +92,7 @@ const ContentEditableWrap = styled.div<{ isEditorState: boolean }>`
   // themeで定義したclassNameでstyleを変えている
 
   & .editor-text-bold {
-    font-weight: bold;
+    font-weight: normal;
   }
 
   & .editor-text-italic {
