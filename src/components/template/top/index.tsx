@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil'
 import { editorState } from '@/recoil/editor'
 import { Switch } from '@/components/parts/Switch'
 import { useRouter } from 'next/router'
-import { usePageview } from '@/hook/ga/use-page-view'
 
 // ========================================================================
 // View
@@ -81,9 +80,6 @@ const Item = styled.div`
 export const Top: FC = () => {
   const state = useRecoilValue(editorState)
   const [isSwitchActive, setIsSwitchActive] = useState(false)
-  const router = useRouter()
-
-  usePageview()
 
   return (
     <Wrap>
