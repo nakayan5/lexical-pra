@@ -4,10 +4,9 @@ import { RichTextEditor } from '@/components/parts/RichTextEditor'
 import { useRecoilValue } from 'recoil'
 import { editorState } from '@/recoil/editor'
 import { Switch } from '@/components/parts/Switch'
-import { useRouter } from 'next/router'
 
 // ========================================================================
-// View
+// Style
 // ========================================================================
 
 const Wrap = styled.div`

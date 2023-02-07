@@ -1,6 +1,5 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import {
-  $createParagraphNode,
   $getSelection,
   $isRangeSelection,
   $isRootNode,
@@ -14,7 +13,6 @@ import {
 import { FC, useEffect } from 'react'
 
 import { $createYouTubeNode, TCreateYouTubeNode } from '@/customnodes/YouTubeNode'
-import { TProps as TYouTubeProps } from '@/components/parts/YouTube'
 
 export type InsertYoutubePayload = Readonly<TCreateYouTubeNode>
 
