@@ -1,13 +1,13 @@
-import { FC, Fragment, memo } from 'react'
+import { FC, Fragment, memo, ComponentProps } from 'react'
 
 // lexical
-import LexicalComposer from '@lexical/react/LexicalComposer'
-import AutoFocusPlugin from '@lexical/react/LexicalAutoFocusPlugin'
-import LinkPlugin from '@lexical/react/LexicalLinkPlugin'
-import ListPlugin from '@lexical/react/LexicalListPlugin'
-import RichTextPlugin from '@lexical/react/LexicalRichTextPlugin'
-import ContentEditable from '@lexical/react/LexicalContentEditable'
-import LexicalMarkdownShortcutPlugin from '@lexical/react/LexicalMarkdownShortcutPlugin'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
+import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin'
+import { ListPlugin } from '@lexical/react/LexicalListPlugin'
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin'
+import { ContentEditable } from '@lexical/react/LexicalContentEditable'
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin'
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
 import { HeadingNode, QuoteNode } from '@lexical/rich-text'
 import { ListItemNode, ListNode } from '@lexical/list'
@@ -15,10 +15,11 @@ import { AutoLinkNode, LinkNode } from '@lexical/link'
 import { TRANSFORMERS } from '@lexical/markdown'
 
 // component
-import { TreeView } from '@/components/parts/TreeView'
+import { EditorTreeView } from '@/components/parts/TreeView'
 import { ToolHeader } from '@/components/parts/ToolHeader'
 import { ToolFooter } from '@/components/parts/ToolFooter'
 import { AutoLink } from '@/components/parts/AutoLink'
+import ErrorBoundary from '@/components/parts/ErrorBoundary'
 
 // plugin
 import { ApplyStatePlugin } from '@/plugins/DisplayStatePlugin'
@@ -43,8 +44,8 @@ type TProps = {
   editorState?: string
 }
 
-type TLexicalComposerProps = Parameters<typeof LexicalComposer>
-type TEditorConfig = Pick<TLexicalComposerProps[0], 'initialConfig'>
+
+type TEditorConfig = ComponentProps<typeof LexicalComposer>['initialConfig']
 
 // =================================================================
 // Style
@@ -184,11 +185,11 @@ const ContentEditableWrap = styled.div<{ isEditorState: boolean }>`
 export const RichTextEditor: FC<TProps> = memo(
   ({ isReadonly, isMarkdown, editorState }: TProps) => {
     // エディタの設定
-    const editorConfig: TEditorConfig = {
-      initialConfig: {
+    const editorConfig: TEditorConfig = ({
         // 使用するthemeを渡す
         theme,
-        readOnly: isReadonly,
+        editable: isReadonly,
+        namespace: 'MyEditor',
         onError(error: unknown) {
           throw error
         },
@@ -201,14 +202,13 @@ export const RichTextEditor: FC<TProps> = memo(
           AutoLinkNode,
           LinkNode,
           ImageNode,
-          YouTubeNode,
+          // YouTubeNode,
           DividerNode,
         ],
-      },
-    }
+    })
 
     return (
-      <LexicalComposer initialConfig={editorConfig.initialConfig}>
+      <LexicalComposer initialConfig={editorConfig}>
         <EditorContainer>
           {!isReadonly ? <ToolHeader /> : null}
           <EditorInner>
@@ -219,6 +219,7 @@ export const RichTextEditor: FC<TProps> = memo(
                 </ContentEditableWrap>
               }
               placeholder={null}
+              ErrorBoundary={ErrorBoundary} // 
             />
             <AutoLink />
             <ImagesPlugin />
@@ -228,13 +229,13 @@ export const RichTextEditor: FC<TProps> = memo(
             <AutoFocusPlugin />
             <LinkPlugin />
             <ListPlugin />
-            {isMarkdown && <LexicalMarkdownShortcutPlugin transformers={TRANSFORMERS} />}
+            {isMarkdown && <MarkdownShortcutPlugin transformers={TRANSFORMERS} />}
             {editorState && <ApplyStatePlugin state={editorState} />}
           </EditorInner>
           {!isReadonly && (
             <Fragment>
               <ToolFooter />
-              <TreeView />
+              <EditorTreeView />
             </Fragment>
           )}
         </EditorContainer>

@@ -10,7 +10,7 @@ import {
   NodeSelection,
   RangeSelection,
 } from 'lexical'
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { $createYouTubeNode, TCreateYouTubeNode } from '@/customnodes/YouTubeNode'
 
@@ -18,7 +18,7 @@ export type InsertYoutubePayload = Readonly<TCreateYouTubeNode>
 
 export const INSERT_YOUTUBE_COMMAND: LexicalCommand<string> = createCommand()
 
-export const YouTubePlugin: FC = () => {
+export const YouTubePlugin = () => {
   const [editor] = useLexicalComposerContext()
 
   useEffect(() => {
