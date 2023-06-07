@@ -13,7 +13,7 @@ import { $createDividerNode } from '@/customnodes/DividerNode'
 
 export const INSERT_DIVIDER_COMMAND: LexicalCommand<null> = createCommand()
 
-export const DividerPlugin: FC = () => {
+export const DividerPlugin = () => {
   const [editor] = useLexicalComposerContext()
 
   useEffect(() => {

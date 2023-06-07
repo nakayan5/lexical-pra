@@ -1,4 +1,4 @@
-import LexicalAutoLinkPlugin from '@lexical/react/LexicalAutoLinkPlugin'
+import { AutoLinkPlugin } from '@lexical/react/LexicalAutoLinkPlugin'
 import { FC } from 'react'
 
 // 公式で実装されていた正規表現です
@@ -38,5 +38,5 @@ const MATCHERS = [
  */
 
 export const AutoLink: FC = () => {
-  return <LexicalAutoLinkPlugin matchers={MATCHERS} />
+  return <AutoLinkPlugin matchers={MATCHERS} />
 }

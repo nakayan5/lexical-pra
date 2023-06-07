@@ -1,5 +1,5 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import LexicalTreeView from '@lexical/react/LexicalTreeView'
+import { TreeView } from '@lexical/react/LexicalTreeView'
 import { FC } from 'react'
 import styled from 'styled-components'
 
@@ -69,12 +69,12 @@ const Wrap = styled.div`
 // View
 // =================================================================
 
-export const TreeView: FC = () => {
+export const EditorTreeView: FC = () => {
   const [editor] = useLexicalComposerContext()
 
   return (
     <Wrap>
-      <LexicalTreeView
+      <TreeView
         viewClassName='tree-view-output'
         timeTravelPanelClassName='debug-timetravel-panel'
         timeTravelButtonClassName='debug-timetravel-button'

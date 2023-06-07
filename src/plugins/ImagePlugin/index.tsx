@@ -18,7 +18,7 @@ export type InsertImagePayload = Readonly<ImagePayload>
 
 export const INSERT_IMAGE_COMMAND: LexicalCommand<InsertImagePayload> = createCommand()
 
-export const ImagesPlugin: FC = () => {
+export const ImagesPlugin = () => {
   const [editor] = useLexicalComposerContext()
 
   useEffect(() => {
