@@ -5,12 +5,12 @@ export class DividerNode extends DecoratorNode<JSX.Element> {
   constructor(key?: NodeKey) {
     super(key)
   }
-  // * required https://github.com/attivita/lexical-rich-editor/blob/main/memo/custom-node.md
+  // * required https://github.com/nakayan5/lexical-pra/blob/develop/memo/custom-node.md
   static getType(): string {
     return 'divider'
   }
 
-  // * required https://github.com/attivita/lexical-rich-editor/blob/main/memo/custom-node.md
+  // * required https://github.com/nakayan5/lexical-pra/blob/develop/memo/custom-node.md
   static clone(node: DividerNode): DividerNode {
     return new DividerNode(node.__key)
   }
@@ -39,7 +39,7 @@ export class DividerNode extends DecoratorNode<JSX.Element> {
     return span
   }
 
-  // https://github.com/attivita/lexical-rich-editor/blob/main/memo/custom-node.md
+  // https://github.com/nakayan5/lexical-pra/blob/develop/memo/custom-node.md
   updateDOM(): false {
     return false
   }
