@@ -1,8 +1,7 @@
 // https://ja.reactjs.org/docs/error-boundaries.html
 // https://speakerdeck.com/taro28/reactnosuspensewoshi-tutafei-tong-qi-chu-li-noerahandoringu
 
-import React, { ReactNode, ErrorInfo } from "react";
-
+import React, { ErrorInfo } from "react";
 
 type ErrorBoundaryProps = {
     children: JSX.Element;
